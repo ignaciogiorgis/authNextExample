@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import Navigation from '../components/Navigation'
+import SessionProvider from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,11 +14,16 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <SessionProvider>
+          <Navigation />
+          {children}
+        </SessionProvider>
+      </body>
     </html>
   )
 }
